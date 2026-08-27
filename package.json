@@ -1,0 +1,23 @@
+{
+  "name": "islamic-content-mcp-render",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render deployment wrapper for the Islamic Content MCP stdio server via Supergateway Streamable HTTP.",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "islamic-content-mcp": "./bin.js"
+  },
+  "scripts": {
+    "start:mcp": "node bin.js",
+    "start": "supergateway --stdio 'node bin.js' --outputTransport streamableHttp --stateful --sessionTimeout 60000 --port ${PORT:-10000} --streamableHttpPath /mcp --healthEndpoint /healthz --logLevel info"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.4.1",
+    "islamic-content-sdk": "1.0.5",
+    "supergateway": "3.4.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
