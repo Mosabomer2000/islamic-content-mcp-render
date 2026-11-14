@@ -31,14 +31,14 @@ Cloudflare URLs:
 | Project | Present state / dependency | Priority |
 | --- | --- | --- |
 | `midad-transcripts` | D1 copied; read-only API preview; source write endpoints and UI still on Val Town | High: full endpoint parity and syncing |
-| `bahith-bulk-domain-research` | D1 parity by row counts (jobs 300, pages 1229, native articles 1059); interval worker each hour, native task every 15 minutes remain active on Val Town | High: migrate job execution and schedule |
-| `mawsuat-adillat-sihhat-al-islam` | Static HTML/CSS/JS site; not yet migrated | Medium: static assets and verification |
+| `bahith-bulk-domain-research` | **Read-only Cloudflare UI and JSON/CSV export tested** (`mosab-bulk-readonly-preview`); statistics and filtered rows match Val Town. Original hourly/15min jobs remain on Val Town. | High: safe scheduled-job cutover |
+| `mawsuat-adillat-sihhat-al-islam` | Val Town contains the unmodified basic HTML starter (`Hi there!`), template CSS/JS, not an actual encyclopedia. Publishing this as the encyclopedia would be misleading. | Blocked: locate actual project content first |
 | `research-execution-gateway` | D1 quota rows 5; complex MCP source with npm dependencies and audit modules; no completed Worker port | High |
 | `bahith-quranonlinelibrary-adapter` | HTML parsing (Cheerio); no completed Worker port | Medium |
 | `musannif-personal-critical-guard` | MCP SDK/Zod dependencies; no completed Worker port | Medium |
 | `bahith-mcp-smoke-20261017` | Successfully ported and tested | Complete pilot |
 | `bahith-fasi-image-verifier` | Single diagnostic script; not an HTTP app; evaluate archival rather than production migration | Low |
-| `bahith-aleman-native-mcp` | D1 parity by row counts (books 424, sections 299, roots 27); sync task every 6h remains on Val Town | High: sync and MCP routes |
+| `bahith-aleman-native-mcp` | **Cloudflare read-only MCP preview tested** (`mosab-aleman-readonly-preview`): status/search/cached-section tools pass; sync intentionally disabled. Original 6-hour sync on Val Town unchanged. | High: remaining MCP tools + sync migration |
 | `bahith-public-mcp-gateway` | Equivalent public Turath fallback Worker exists and protocol checks pass | Upstream verification / cutover pending |
 | `bahith-federated-public-mcp` | D1 gateway quota 4 rows copied; upstream federation and quota enforcement not yet ported | Medium |
 
@@ -61,3 +61,13 @@ Cloudflare URLs:
 Cloudflare D1 databases already present: `mosab-bahith-federated`, `mosab-research-execution`, `mosab-bahith-aleman`, `mosab-bahith-bulk`, `mosab-midad-transcripts`.
 
 **Unchanged platforms:** Supabase `mosab-mcp-hub`, all Railway projects, and original Val Town projects. Connected Vercel currently lists no projects; account scope must be rechecked before any claimed Vercel migration.
+
+
+## Phase 2 — verified 2026-11-14
+
+- **8 database tables** matched between Val Town and Cloudflare D1 on row count **and** summed character lengths for selected core columns: Midad (segments, videos, segment_editions), bulk research (jobs, pages, native_articles), Al-Eman (books, sections). These are aggregate parity checks, not cryptographic row-by-row verification.
+- **Al-Eman read-only MCP port**: https://mosab-aleman-readonly-preview.mosabomer2015.workers.dev/ . Protocol initialize, three-tool list, status (424 books, 299 indexed sections), search (matched book IDs 180 and 575), cached text read (book 606, section 940264; 15,543 characters), and disabled sync all passed. No original catalog writer was switched off.
+- **Bulk domain research read-only web port**: https://mosab-bulk-readonly-preview.mosabomer2015.workers.dev/ . HTML, CSV and JSON GET passed; JSON stats and all 3 filtered rows for 'نزع البركة' exactly matched Val Town. POST returns 405. Original schedulers remain active only on Val Town.
+- **QA suite** extended: https://mosab-smoke-cutover-probe.mosabomer2015.workers.dev/ returned `pass:true` for smoke MCP, Turath fallback protocol, Midad preview, Al-Eman preview, and bulk research preview. This only establishes checked behavior, not full program parity.
+- Additional GitHub sources stored at `bahith-aleman-native-mcp/original-aleman.ts`, `bahith-aleman-native-mcp/worker-readonly.js`, `bahith-bulk-domain-research/original-*.ts`, `bahith-bulk-domain-research/worker-readonly.js`, and `qa/worker-v2.js`.
+- **No production URL redirects, no cron cutovers, no paid services, no Supabase/Railway modifications** during phase 2.
