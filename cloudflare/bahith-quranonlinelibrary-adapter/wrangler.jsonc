@@ -1,0 +1,12 @@
+{
+  "name": "mosab-quranonline-adapter",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-14",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": true,
+  "observability": {
+    "enabled": true
+  }
+}
