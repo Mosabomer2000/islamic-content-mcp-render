@@ -1,0 +1,35 @@
+name: Compile archived Val Town TypeScript
+on:
+  push:
+    branches:
+      - val-town-archive-20261114
+    paths:
+      - 'valtown-snapshot/**'
+      - 'migration/compile-valtown.mjs'
+      - '.github/workflows/valtown-compile.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  transpile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install TypeScript compiler
+        run: npm install --no-save --no-package-lock --ignore-scripts typescript@5.9.3
+      - name: Transpile archived files
+        run: node migration/compile-valtown.mjs
+      - name: Commit generated JavaScript
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/transpiled
+          if ! git diff --cached --quiet; then
+            git commit -m "Compile Val Town snapshots to JavaScript"
+            git push origin HEAD:val-town-archive-20261114
+          fi
