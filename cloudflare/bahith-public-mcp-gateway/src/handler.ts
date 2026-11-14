@@ -21,7 +21,7 @@ async function upstream(name:string,args:Obj={}):Promise<Obj>{
  const controller=new AbortController();
  const t=setTimeout(()=>controller.abort(),11000);
  try{
-  const x=await fetch(UPSTREAM,{method:"POST",headers:{"content-type":"application/json","accept":"application/json, text/event-stream"},body:JSON.stringify(body),signal:controller.signal,redirect:"error"});
+  const x=await fetch(UPSTREAM,{method:"POST",headers:{"content-type":"application/json","accept":"application/json, text/event-stream"},body:JSON.stringify(body),signal:controller.signal,redirect:"manual"});
   if(!x.ok)throw new Error("upstream HTTP "+x.status);
   if(Number(x.headers.get("content-length")||"0")>125000)throw new Error("upstream response exceeds size bound");
   const raw=await x.text();
