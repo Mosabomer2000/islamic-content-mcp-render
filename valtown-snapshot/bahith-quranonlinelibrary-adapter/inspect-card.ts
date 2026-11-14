@@ -1,0 +1,1 @@
+const r=await fetch("https://quranonlinelibrary.com/get-searched-book?searchword="+encodeURIComponent("الجزري"));const s=await r.text();let a=s.indexOf('<div class="allInner">');console.log(s.slice(a+600,a+6500));
