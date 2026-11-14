@@ -14,6 +14,7 @@ function visit(p) {
 }
 visit(root);
 let count = 0;
+const failures = [];
 for (const f of sourceFiles) {
   const relative = path.relative(root, f);
   const dest = path.join(outRoot, relative.replace(/\.tsx?$/, ".js"));
@@ -29,10 +30,22 @@ for (const f of sourceFiles) {
     reportDiagnostics: true,
   });
   const errors = (out.diagnostics || []).filter(d => d.category === ts.DiagnosticCategory.Error);
-  if (errors.length) throw new Error(f + ": " + errors.map(x => ts.flattenDiagnosticMessageText(x.messageText, " ")).join(" / "));
+  if (errors.length) {
+    const details = errors.map(d => {
+      const location = d.file && d.start !== undefined ? d.file.getLineAndCharacterOfPosition(d.start) : null;
+      return {line: location ? location.line + 1 : null, column: location ? location.character + 1 : null, message: ts.flattenDiagnosticMessageText(d.messageText, " ")};
+    });
+    failures.push({file:f,diagnostics:details});
+    console.error("Skipping invalid archived source:", f, JSON.stringify(details.slice(0,30)));
+    continue;
+  }
   const js = out.outputText.replace(/(from\s+["'])(\.[^"']+)\.tsx?(["'])/g, "$1$2.js$3");
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, js, "utf8");
   count++;
 }
 console.log("Transpiled", count, "TypeScript/TSX files from Val Town archive");
+
+fs.mkdirSync(outRoot, {recursive:true});
+fs.writeFileSync(path.join(outRoot,"compile-errors.json"), JSON.stringify(failures,null,2)+"\\n");
+console.log("Invalid source files skipped:", failures.length);
