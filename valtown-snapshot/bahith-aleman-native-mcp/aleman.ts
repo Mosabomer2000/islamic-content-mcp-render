@@ -166,9 +166,7 @@ const defs=[
  {name:"aleman_open_section",description:"Fetch an original book chapter, index its text, return original URL and SHA-256",inputSchema:{type:"object",properties:{book_id:{type:"integer"},section_id:{type:"integer"},start_chars:{type:"integer",minimum:0,maximum:160000},max_chars:{type:"integer"}},required:["book_id","section_id"]}},
  {name:"aleman_resolve_book",description:"Directly resolve a known book number and exact title against original al-eman.com book page even before incremental catalog indexing",inputSchema:{type:"object",properties:{book_id:{type:"integer"},title:{type:"string"}},required:["book_id","title"]}},
  {name:"aleman_expand_section_index",description:"Read exact section TOC and locally index nested subsection IDs without bulk downloading chapter texts",inputSchema:{type:"object",properties:{book_id:{type:"integer"},section_id:{type:"integer"},limit:{type:"integer",minimum:1,maximum:100}},required:["book_id","section_id"]}},
- {name
-
-[Truncated: showing chars 0–19000 of 21288. Use offset=19000 to continue.]pter text without making additional origin fetches",inputSchema:{type:"object",properties:{book_id:{type:"integer"},section_id:{type:"integer"},start_chars:{type:"integer",minimum:0,maximum:160000},max_chars:{type:"integer"}},required:["book_id","section_id"]}}
+ {name:"aleman_read_cached_section",description:"Read paginated locally cached chapter text without making additional origin fetches",inputSchema:{type:"object",properties:{book_id:{type:"integer"},section_id:{type:"integer"},start_chars:{type:"integer",minimum:0,maximum:160000},max_chars:{type:"integer"}},required:["book_id","section_id"]}}
 ];
 function jr(id:any,result:any){return new Response(JSON.stringify({jsonrpc:"2.0",id,result}),{headers:HEAD})}
 function ok(id:any,obj:any){return jr(id,{content:[{type:"text",text:JSON.stringify(obj)}],structuredContent:obj,isError:false})}
