@@ -1,0 +1,36 @@
+{
+  "service": "wordcraft-mcp",
+  "status": "not_deployed",
+  "source": "wordcraft-legacy-server.ts",
+  "runtime": "Bun with Linux wordcraft-cli binary and filesystem",
+  "original_release": "v0.5.0",
+  "newer_candidate": "v0.18.1",
+  "candidate_status": "not_runtime_tested_do_not_autodeploy",
+  "container_image_original": "ghcr.io/railwayapp/function-bun:1.4.4",
+  "port": 3000,
+  "public_health_path": "/health",
+  "public_selftest_path": "/selftest",
+  "environment_variable_names": [
+    "MCP_TOKEN"
+  ],
+  "credentials_copied": false,
+  "filesystem_paths": [
+    "/tmp/wordcraft-install",
+    "/tmp/wordcraft-sessions"
+  ],
+  "persistent_volume_present": false,
+  "recovery_steps": [
+    "Build a non-Workers Linux container from Dockerfile.wordcraft (test only)",
+    "Set a new strong MCP_TOKEN as host secret; never commit it",
+    "Start a test instance with localhost-only port and run GET /health and GET /selftest",
+    "Test initialize, tools/list, document creation, save, download and session isolation",
+    "Verify newest release asset and SHA256 before changing original_release",
+    "Put HTTPS + proper access control in front before any public exposure"
+  ],
+  "security_warnings": [
+    "Original gateway uses a token in URL path; prefer short-lived auth or header based tokens in future",
+    "Runtime archive download in legacy code does not verify SHA256; use checksum validation for production",
+    "Session files on /tmp are lost on redeploy",
+    "Migrating to Cloudflare Workers Free cannot run native executable"
+  ]
+}
