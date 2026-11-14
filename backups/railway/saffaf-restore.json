@@ -1,0 +1,47 @@
+{
+  "service": "saffaf-mcp",
+  "status": "not_deployed",
+  "image": "python:3.13-slim-trixie",
+  "runtime": "Linux container with LibreOffice Writer, Poppler, Fontconfig, fonts and Python",
+  "port": 8080,
+  "public_health_path": "/health",
+  "original_pip_pins": [
+    "mcp==2.3.0",
+    "pdfplumber==0.11.9",
+    "fonttools==4.63.0",
+    "uvicorn==0.37.0"
+  ],
+  "required_os_packages": [
+    "libreoffice-writer",
+    "fontconfig",
+    "poppler-utils",
+    "fonts-liberation",
+    "ca-certificates"
+  ],
+  "environment_variable_names": [
+    "DEBIAN_FRONTEND",
+    "PORT",
+    "PYTHONUNBUFFERED",
+    "SAFFAF_API_KEY",
+    "SAFFAF_BOOTSTRAP_CODE",
+    "SAFFAF_LINK_KEY",
+    "SAFFAF_PUBLIC_BASE_URL",
+    "SAFFAF_RUNNER_CODE",
+    "SAFFAF_SERVER_CODE",
+    "SAFFAF_SOURCE_DIR",
+    "SAFFAF_WORK_DIR"
+  ],
+  "credentials_and_embedded_code_copied": false,
+  "restore_steps": [
+    "Recover private bootstrap/runner/server code through authorized secret channel; do not copy env values into public GitHub",
+    "Build dependencies into container image; avoid apt-get every startup",
+    "Use authentic fonts and consistent locale; test Arabic and RTL text rendering",
+    "Run preflight and typeset in isolated test container",
+    "Verify exported PDF/office documents visually before production cutover"
+  ],
+  "limitations": [
+    "Cannot reconstruct source code from environment variable names alone",
+    "LibreOffice renderer cannot run as ordinary Cloudflare Worker",
+    "Original direct ChatGPT Saffaf connector currently reports Application not found"
+  ]
+}
