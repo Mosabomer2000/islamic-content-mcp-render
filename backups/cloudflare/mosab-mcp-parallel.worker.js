@@ -1,6 +1,6 @@
 // Mosab Research Parallel MCP v1.0.0 — strict read-only subset of retired Railway gateway.
 // Sources are public fixed-origin Supabase Edge Functions; no arbitrary URLs, credentials or writes.
-const VERSION="1.1.0",ROOT="https://pdsxlmrfmbdhobcgujje.supabase.co/functions/v1/";
+const VERSION="1.2.0",ROOT="https://pdsxlmrfmbdhobcgujje.supabase.co/functions/v1/";
 const ORIGINS=Object.freeze({
   legacy:"islamic-research-mcp",os:"islamic-research-v0205-acceptance-next",
   aljam3:"aljam3-mcp",usul:"usul-mcp",dorar:"dorar-mcp"
@@ -170,7 +170,7 @@ export default {
   if(rpc.method==="server/discover")return success(id,{resultType:"complete",supportedVersions:["2026-07-28","2025-11-25","2025-06-18"],capabilities:{tools:{listChanged:false}},ttlMs:120000,cacheScope:"public"});
   if(rpc.method==="initialize")return success(id,{protocolVersion:["2026-07-28","2025-11-25","2025-06-18"].includes(rpc.params?.protocolVersion)?rpc.params.protocolVersion:"2025-11-25",capabilities:{tools:{listChanged:false}},serverInfo:{name:"mosab-research-parallel",title:"Mosab Research Parallel",version:VERSION},instructions:"Restricted read-only parallel compatibility gateway; quotations and chains are not source verified by this layer."});
   if(rpc.method==="ping")return success(id,{});
-  if(rpc.method==="tools/list")return success(id,{tools});
+  if(rpc.method==="tools/list")return success(id,request.headers.get("mcp-protocol-version")==="2026-07-28"||rpc.params?.protocolVersion==="2026-07-28"?{resultType:"complete",tools,ttlMs:120000,cacheScope:"public"}:{tools});
   if(rpc.method!=="tools/call")return fail(id,-32601,"Method not found");
   const p=rpc.params;
   if(!isObj(p)||typeof p.name!=="string")return fail(id,-32602,"Invalid params: tool name required");
