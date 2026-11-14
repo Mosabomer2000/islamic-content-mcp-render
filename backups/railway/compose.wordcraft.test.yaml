@@ -10,8 +10,6 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
     read_only: false
-    tmpfs:
-      - /tmp:rw,size=256m
     security_opt:
       - no-new-privileges:true
     restart: "no"
