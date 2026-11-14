@@ -22,6 +22,15 @@ The old WordCraft gateway is pinned to `v0.5.0`; `v0.18.1` is a newer candidate 
 
 This is a **deployment recipe, not a tested running replacement**. The test may fail due to Docker image dependencies, WordCraft archive layout, or memory limits.
 
+
+## WordCraft v0.18.1 candidate (NOT deployed)
+
+A separate `wordcraft-v0.18.1-candidate.ts` upgrades the configured release and requires an official `SHA256SUMS.txt` match before executing the downloaded archive. It uses a different temporary install directory from v0.5.0. This is a **static code candidate**; downloading and running the binary and testing the server's MCP compatibility have NOT been performed.
+
+For a local isolated test, copy `wordcraft-v0.18.1-candidate.ts`, `Dockerfile.wordcraft.candidate`, `compose.wordcraft.candidate.yaml` and `.dockerignore` into one folder, then run `docker compose -f compose.wordcraft.candidate.yaml up --build` with a private `MCP_TOKEN`. It binds only `127.0.0.1:3001`. Verify `GET /health`, `GET /selftest`, tool discovery, document create/edit/save/download, and confirm no path traversal or session leakage. The legacy `v0.5.0` source is retained for rollback.
+
+The experimental SHA256 check is not a substitute for independent trust in GitHub release signing, a compatible C library, or end-to-end document operation tests. Do not switch production before these pass.
+
 ## Safety
 
 - The GitHub repository and this backup branch are public. No user secrets, profile data, OAuth state, service-role keys or embedded Saffaf bootstrap code are included.
