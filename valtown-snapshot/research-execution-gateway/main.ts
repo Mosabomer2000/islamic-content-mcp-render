@@ -281,9 +281,7 @@ function checkTopicAnchor(q: string, c: any, kind: string) {
 export function hiddenCorpusRouteHint(question: string) {
   const q = question.toLocaleLowerCase();
   const corpus = /(?:مكتبة|مكتبات|كتب|مخطوط|أرشيف|مصادر|نصوص|بوابة علمية|library|books|corpus|archives?|collection|manuscripts?|text repository)/i.test(q);
-  const unexpected = /(?:مغمور|مغمورة|مخفي|مخفية|غير متوقع|لا يوحي|اسمه|اسم الموقع|هوية الموقع|
-
-[Truncated: showing chars 0–19000 of 41795. Use offset=19000 to continue.].path|under.indexed|buried)/i.test(q);
+  const unexpected = /(?:مغمور|مغمورة|مخفي|مخفية|غير متوقع|لا يوحي|اسمه|اسم الموقع|هوية الموقع|لوحة مفاتيح|arabic.keyboard|hidden|unexpected|obscure|identity mismatch|deep.path|under.indexed|buried)/i.test(q);
   const optOut = /(?:لا تستخدم (?:الويب|الإنترنت)|بدون (?:الويب|الإنترنت)|لا تبحث (?:على الإنترنت|في الويب)|do not browse|don\x27t browse|without (?:web|internet)|no web)/i.test(q);
   const relevant = !optOut && ((corpus && unexpected) || /arabic.keyboard\.info/i.test(q));
   return {
@@ -538,9 +536,8 @@ const handler = createMcpHandler(() => {
       });
       return reply({
         status: "original_readme_inspected", repository, original_readme_read: true,
-        original_excerpt_available: true, complete_document_examine
-
-[Truncated: showing chars 19076–38076 of 41795. Use offset=38076 to continue.]al_test",
+        original_excerpt_available: true, complete_document_examined_for_terms: true,
+        evidence_kind: "maintainer_documentation_not_functional_test",
         required_any_matched: matched,
         required_any_visible: matched.length>0,
         explicit_exclusion_matches: conflicts,
