@@ -1,0 +1,13 @@
+{
+  "name": "mosab-bahith-aleman",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-14",
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mosab-bahith-aleman",
+      "database_id": "62b7211f-25ec-483d-8e02-9f6a611db9f7"
+    }
+  ]
+}
