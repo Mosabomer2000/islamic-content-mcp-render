@@ -1,0 +1,7 @@
+for (const [path, q] of [["get-searched-book?searchword=" + encodeURIComponent("الجزري"), "title"], ["get-searched-mussanif?m=" + encodeURIComponent("ابن الجزري"), "author"], ["get-searched-book-by-number?searchword=1", "id"]]) {
+    let r = await fetch("https://quranonlinelibrary.com/" + path, { signal: AbortSignal.timeout(15000) });
+    let s = await r.text();
+    let main = s.match(/(?:جميع الكتب|نتائج البحث|عدد الكتب)[^<]{0,70}/);
+    let links = [...s.matchAll(/href=["'](https:\/\/quranonlinelibrary.com\/kutub-library\/[^"']+)["']/g)].slice(0, 5).map(m => m[1]);
+    console.log(JSON.stringify({ q, status: r.status, size: s.length, match: main?.[0], links, cardHints: s.slice(s.indexOf("جميع الكتب"), s.indexOf("جميع الكتب") + 900) }).slice(0, 2800));
+}

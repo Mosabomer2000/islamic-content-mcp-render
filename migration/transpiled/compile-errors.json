@@ -1,0 +1,317 @@
+[
+  {
+    "file": "valtown-snapshot/bahith-aleman-native-mcp/aleman.ts",
+    "diagnostics": [
+      {
+        "line": 171,
+        "column": 1,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 11,
+        "message": "']' expected."
+      },
+      {
+        "line": 171,
+        "column": 21,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 27,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 28,
+        "message": "Invalid character."
+      },
+      {
+        "line": 171,
+        "column": 35,
+        "message": "':' expected."
+      },
+      {
+        "line": 171,
+        "column": 38,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 45,
+        "message": "':' expected."
+      },
+      {
+        "line": 171,
+        "column": 49,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 62,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 65,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 73,
+        "message": "':' expected."
+      },
+      {
+        "line": 171,
+        "column": 74,
+        "message": "Identifier expected."
+      },
+      {
+        "line": 171,
+        "column": 75,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 80,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 85,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 93,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 100,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 111,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 118,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 125,
+        "message": "',' expected."
+      },
+      {
+        "line": 171,
+        "column": 146,
+        "message": "';' expected."
+      },
+      {
+        "line": 171,
+        "column": 181,
+        "message": "';' expected."
+      },
+      {
+        "line": 171,
+        "column": 209,
+        "message": "';' expected."
+      },
+      {
+        "line": 171,
+        "column": 238,
+        "message": "';' expected."
+      },
+      {
+        "line": 171,
+        "column": 290,
+        "message": "';' expected."
+      },
+      {
+        "line": 171,
+        "column": 312,
+        "message": "';' expected."
+      },
+      {
+        "line": 171,
+        "column": 322,
+        "message": "';' expected."
+      },
+      {
+        "line": 171,
+        "column": 322,
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "line": 171,
+        "column": 336,
+        "message": "Unterminated string literal."
+      },
+      {
+        "line": 172,
+        "column": 1,
+        "message": "Declaration or statement expected."
+      }
+    ]
+  },
+  {
+    "file": "valtown-snapshot/research-execution-gateway/main.ts",
+    "diagnostics": [
+      {
+        "line": 284,
+        "column": 22,
+        "message": "Unterminated regular expression literal."
+      },
+      {
+        "line": 286,
+        "column": 11,
+        "message": "']' expected."
+      },
+      {
+        "line": 286,
+        "column": 21,
+        "message": "',' expected."
+      },
+      {
+        "line": 286,
+        "column": 27,
+        "message": "',' expected."
+      },
+      {
+        "line": 286,
+        "column": 28,
+        "message": "Invalid character."
+      },
+      {
+        "line": 286,
+        "column": 35,
+        "message": "';' expected."
+      },
+      {
+        "line": 286,
+        "column": 45,
+        "message": "';' expected."
+      },
+      {
+        "line": 286,
+        "column": 62,
+        "message": "';' expected."
+      },
+      {
+        "line": 286,
+        "column": 73,
+        "message": "Identifier expected."
+      },
+      {
+        "line": 286,
+        "column": 74,
+        "message": "Declaration or statement expected."
+      },
+      {
+        "line": 286,
+        "column": 75,
+        "message": "Declaration or statement expected."
+      },
+      {
+        "line": 286,
+        "column": 101,
+        "message": "';' expected."
+      },
+      {
+        "line": 286,
+        "column": 102,
+        "message": "Unterminated regular expression literal."
+      },
+      {
+        "line": 543,
+        "column": 1,
+        "message": "',' expected."
+      },
+      {
+        "line": 543,
+        "column": 11,
+        "message": "']' expected."
+      },
+      {
+        "line": 543,
+        "column": 21,
+        "message": "',' expected."
+      },
+      {
+        "line": 543,
+        "column": 27,
+        "message": "',' expected."
+      },
+      {
+        "line": 543,
+        "column": 32,
+        "message": "Invalid character."
+      },
+      {
+        "line": 543,
+        "column": 39,
+        "message": "':' expected."
+      },
+      {
+        "line": 543,
+        "column": 42,
+        "message": "',' expected."
+      },
+      {
+        "line": 543,
+        "column": 49,
+        "message": "':' expected."
+      },
+      {
+        "line": 543,
+        "column": 53,
+        "message": "',' expected."
+      },
+      {
+        "line": 543,
+        "column": 66,
+        "message": "',' expected."
+      },
+      {
+        "line": 543,
+        "column": 69,
+        "message": "',' expected."
+      },
+      {
+        "line": 543,
+        "column": 77,
+        "message": "':' expected."
+      },
+      {
+        "line": 543,
+        "column": 78,
+        "message": "Identifier expected."
+      },
+      {
+        "line": 543,
+        "column": 86,
+        "message": "',' expected."
+      },
+      {
+        "line": 543,
+        "column": 88,
+        "message": "Unterminated string literal."
+      },
+      {
+        "line": 544,
+        "column": 9,
+        "message": "':' expected."
+      },
+      {
+        "line": 544,
+        "column": 29,
+        "message": "',' expected."
+      }
+    ]
+  }
+]\n
