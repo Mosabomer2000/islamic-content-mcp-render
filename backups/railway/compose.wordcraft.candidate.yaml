@@ -1,0 +1,14 @@
+# Test-only local container. It does not expose a public port.
+services:
+  wordcraft-candidate:
+    build:
+      context: .
+      dockerfile: Dockerfile.wordcraft.candidate
+    environment:
+      MCP_TOKEN: ${MCP_TOKEN:?Set a private test token}
+      PORT: "3000"
+    ports:
+      - "127.0.0.1:3001:3000"
+    security_opt:
+      - no-new-privileges:true
+    restart: "no"
