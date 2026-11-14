@@ -1,0 +1,12 @@
+# Experimental WordCraft v0.18.1 candidate; do not deploy publicly before functional tests.
+FROM oven/bun:1.4.4-debian
+USER root
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates tar gzip \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+COPY wordcraft-v0.18.1-candidate.ts /app/server.ts
+ENV PORT=3000
+EXPOSE 3000
+USER bun
+CMD ["bun", "run", "/app/server.ts"]
