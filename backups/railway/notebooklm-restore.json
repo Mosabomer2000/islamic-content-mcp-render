@@ -1,0 +1,40 @@
+{
+  "service": "notebooklm-mcp",
+  "status": "not_deployed",
+  "image": "tenglin/notebooklm-mcp:0.8.4",
+  "runtime": "persistent Linux Docker container",
+  "port": 9420,
+  "volume": {
+    "mount": "/data",
+    "original_size_mb": 500,
+    "backup_bytes_not_copied": true
+  },
+  "environment_variable_names": [
+    "HOME",
+    "NOTEBOOKLM_HOME",
+    "NOTEBOOKLM_MCP_ALLOW_EXTERNAL_BIND",
+    "NOTEBOOKLM_MCP_HOST",
+    "NOTEBOOKLM_MCP_OAUTH_BASE_URL",
+    "NOTEBOOKLM_MCP_OAUTH_PASSWORD",
+    "NOTEBOOKLM_MCP_PORT",
+    "NOTEBOOKLM_MCP_PUBLIC_URL",
+    "NOTEBOOKLM_MCP_TOKEN",
+    "NOTEBOOKLM_MCP_TRANSPORT",
+    "NOTEBOOKLM_PROFILE",
+    "RAILWAY_RUN_UID"
+  ],
+  "credentials_copied": false,
+  "restore_steps": [
+    "Keep auth profile, OAuth state and master token on private encrypted persistent volume; do not commit",
+    "Use original stable public hostname if possible because OAuth state is tied to its issuer",
+    "Restore into test container isolated from the internet, confirm file permissions and profiles",
+    "Use dedicated Google account, read operator security guide",
+    "Test remote OAuth flow, NotebookLM server_info and read-only notebook listing before reconnecting clients"
+  ],
+  "red_flags": [
+    "master_token.json is account-equivalent credential",
+    "OAuth refresh tokens are long-lived",
+    "Changing public domain may break issuer-bound tokens",
+    "Cloudflare Workers Free is not a persistent container runtime"
+  ]
+}
